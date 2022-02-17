@@ -24,7 +24,7 @@ function entrevistar(koderEntrevistado, callback){
             error = "No se ha entrevistado al new koder";
         }
         callback(error, koderEntrevistado);
-    }, 3000);
+    }, 1000);
 }
 
 function ofertar(koderOfertado,callback){
@@ -36,7 +36,7 @@ function ofertar(koderOfertado,callback){
             console.log("No se ha ofertado al new koder");
         }
         callback(error,koderOfertado);
-    }, 3000);
+    }, 2000);
 }
 
 function inscribir(koderInscrito, callback){
@@ -48,7 +48,7 @@ function inscribir(koderInscrito, callback){
             console.log("El nuevo koder no se ha podido inscribir");
         }
         callback(error,koderInscrito);
-    }, 3000);
+    }, 2000);
 }
 
 function asistirAClases(koderAsistio, callback){
@@ -60,7 +60,7 @@ function asistirAClases(koderAsistio, callback){
             console.log("El koder no asiste a sus clases");
         }
         callback(error,koderAsistio);
-    }, 3000);
+    }, 2000);
 }
 //Aqui termina las funciones
 
@@ -76,19 +76,19 @@ entrevistar(kodemia, (error, koderEntrevistado) =>{
             return
         }
         console.log("Koder ofertado: ", koderOfertado);
+        inscribir(koderEntrevistado,(error, koderInscrito)=>{
+            if(error){
+                console.log("Error", error);
+                return
+            }
+            console.log("Koder Inscrito", koderInscrito);
+            asistirAClases(koderEntrevistado,(error,koderAsistio)=>{
+                if(error){
+                    console.log("Error", error);
+                    return
+                }
+                console.log("Koder Asistió: ", koderAsistio);
+            });
+        });     
     });
-    inscribir(koderEntrevistado,(error, koderInscrito)=>{
-        if(error){
-            console.log("Error", error);
-            return
-        }
-        console.log("Koder Entrevistado", koderInscrito);
-    });
-    asistirAClases(koderEntrevistado,(error,koderAsistio)=>{
-        if(error){
-            console.log("Error", error);
-            return
-        }
-        console.log("Koder Asistió: ", koderAsistio);
-    })
 });
